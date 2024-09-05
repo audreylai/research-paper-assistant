@@ -1,0 +1,7 @@
+#!/bin/sh
+
+npm i
+npm run dev
+
+# Keep container alive indefinitely
+tail -f /dev/null

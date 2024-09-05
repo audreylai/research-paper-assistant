@@ -1,0 +1,21 @@
+services:
+  app:
+    image: ${COMPOSE_PROJECT_NAME}:v0.1.0
+    build:
+      context: .
+    restart: always
+    ports:
+      - 8000:8000
+    volumes:
+      - ${__project_path}:/app
+      # todo: mount db volume for persistent storage
+    command: ["sh", "/app/scripts/boot"]
+    tty: true
+    environment:
+      GEMINI_API_KEY: /run/secrets/gemini_api_key
+    secrets:
+      - gemini_api_key
+
+secrets:
+  gemini_api_key:
+    file: ./secrets/gemini_api_key.txt
