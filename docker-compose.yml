@@ -16,6 +16,18 @@ services:
     secrets:
       - gemini_api_key
 
+  db:
+    image: postgres:16-alpine3.20
+    command:
+      ["postgres", "-c", "log_statement=mod", "-c", "log_destination=stderr"]
+    restart: always
+    ports:
+      - 8001:5432
+    environment:
+      POSTGRES_PASSWORD: /run/secrets/db_password
+
 secrets:
   gemini_api_key:
     file: ./secrets/gemini_api_key.txt
+  db_password:
+    file: ./secrets/db_password.txt

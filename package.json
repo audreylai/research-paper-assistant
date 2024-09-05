@@ -6,12 +6,16 @@
     "dev": "next dev -H 0.0.0.0 -p 8000",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prettier-watch": "onchange \"**/*\" -- prettier --write --ignore-unknown {{changed}}"
   },
   "dependencies": {
     "next": "^14.2.7",
+    "onchange": "^7.1.0",
+    "prettier": "^3.3.3",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "run": "^1.5.0"
   },
   "devDependencies": {
     "@types/node": "^20",

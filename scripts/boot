@@ -1,6 +1,8 @@
 #!/bin/sh
 
-npm i
+# Format code on save 
+npm run prettier-watch &
+
 npm run dev
 
 # Keep container alive indefinitely
