@@ -13,9 +13,9 @@
     "next": "^14.2.7",
     "onchange": "^7.1.0",
     "prettier": "^3.3.3",
+    "prisma": "^5.19.1",
     "react": "^18",
-    "react-dom": "^18",
-    "run": "^1.5.0"
+    "react-dom": "^18"
   },
   "devDependencies": {
     "@types/node": "^20",

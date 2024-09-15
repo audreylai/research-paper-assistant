@@ -1,18 +1,19 @@
 services:
   app:
     image: ${COMPOSE_PROJECT_NAME}:v0.1.0
+    platform: linux/arm64
     build:
       context: .
     restart: always
     ports:
       - 8000:8000
+    environment:
+      OPENAI_API_KEY: /run/secrets/openai_api_key
     volumes:
       - ${__project_path}:/app
       # todo: mount db volume for persistent storage
     command: ["sh", "/app/scripts/boot"]
     tty: true
-    environment:
-      GEMINI_API_KEY: /run/secrets/gemini_api_key
     secrets:
       - gemini_api_key
 
@@ -24,10 +25,15 @@ services:
     ports:
       - 8001:5432
     environment:
+      POSTGRES_USER: /run/secrets/db_username
       POSTGRES_PASSWORD: /run/secrets/db_password
 
 secrets:
-  gemini_api_key:
-    file: ./secrets/gemini_api_key.txt
   db_password:
-    file: ./secrets/db_password.txt
+    file: ./secrets/db/password.txt
+  db_username:
+    file: ./secrets/db/username.txt
+  db_name:
+    file: ./secrets/db/
+  openai_api_key:
+    file: ./secrets/openai/api_key.txt
