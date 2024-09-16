@@ -5,4 +5,5 @@ Dockerfile
 .gitignore
 bin/
 secrets/
+aaa/
 *~

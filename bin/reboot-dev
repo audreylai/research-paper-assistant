@@ -8,7 +8,14 @@ fi
 
 docker compose build
 
-# Stop current running container, if any
+# Force stop current running container(s), if any
 docker compose kill
 
-docker compose up -d --remove-orphans
+# Prune all dangling images
+docker image prune -f
+
+# Create and start container(s)
+# (https://docs.docker.com/reference/cli/docker/compose/up/)
+#   -V: Recreate all anonymous volumes instead of retrieving data
+#   -d: Run in detached mode (background)
+docker compose up -V -d --remove-orphans

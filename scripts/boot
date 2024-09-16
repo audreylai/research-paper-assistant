@@ -1,5 +1,15 @@
 #!/bin/sh
 
+npm i
+
+# temp workaround: Prisma only takes in entire database URL connection (why???)
+# see https://github.com/prisma/prisma/discussions/12600
+export DATABASE_URL=`cat $DATABASE_URL_FILE`
+
+npx prisma generate
+npx prisma db push
+npx prisma db seed
+
 # Format code on save 
 npm run prettier-watch &
 

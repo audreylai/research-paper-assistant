@@ -8,14 +8,15 @@ services:
     ports:
       - 8000:8000
     environment:
-      OPENAI_API_KEY: /run/secrets/openai_api_key
+      DATABASE_URL_FILE: /run/secrets/db_url
     volumes:
       - ${__project_path}:/app
       # todo: mount db volume for persistent storage
     command: ["sh", "/app/scripts/boot"]
     tty: true
     secrets:
-      - gemini_api_key
+      - openai_api_key
+      - db_url
 
   db:
     image: postgres:16-alpine3.20
@@ -25,8 +26,14 @@ services:
     ports:
       - 8001:5432
     environment:
-      POSTGRES_USER: /run/secrets/db_username
-      POSTGRES_PASSWORD: /run/secrets/db_password
+      POSTGRES_USER_FILE: /run/secrets/db_username
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+      POSTGRES_DB_FILE: /run/secrets/db_name
+      PGUSER: postgres
+    secrets:
+      - db_password
+      - db_username
+      - db_name
 
 secrets:
   db_password:
@@ -34,6 +41,8 @@ secrets:
   db_username:
     file: ./secrets/db/username.txt
   db_name:
-    file: ./secrets/db/
+    file: ./secrets/db/name.txt
+  db_url:
+    file: ./secrets/db/url.txt
   openai_api_key:
     file: ./secrets/openai/api_key.txt
