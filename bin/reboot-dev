@@ -9,7 +9,10 @@ fi
 docker compose build
 
 # Force stop current running container(s), if any
-docker compose kill
+# (https://docs.docker.com/reference/cli/docker/compose/down/)
+#   -v: Remove named volumes in Compose file & anon volumes attached to containers
+#   -t: Specify timeout (seconds) before sending SIGKILL
+docker compose down -v -t 0
 
 # Prune all dangling images
 docker image prune -f
