@@ -1,11 +1,13 @@
 #!/bin/sh
 
-npm i
+# Clean up unused modules
+npm prune
 
 # temp workaround: Prisma only takes in entire database URL connection (why???)
 # see https://github.com/prisma/prisma/discussions/12600
 export DATABASE_URL=`cat $DATABASE_URL_FILE`
 
+# Generate Prisma client, sync Prisma schema with db schema, and seed db
 npx prisma generate
 npx prisma db push
 npx prisma db seed
