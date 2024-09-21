@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 # Ensure docker compose is version 2
-if [[ $(docker compose version) != *"v2"* ]]; then
-  echo "Docker Compose version must be Version 2"
-  exit 1
-fi
+# if [[ $(docker compose version) != *"v2"* ]]; then
+#   echo "Docker Compose version must be Version 2"
+#   exit 1
+# fi
 
 docker compose build
 
