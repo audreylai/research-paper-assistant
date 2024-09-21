@@ -37,3 +37,6 @@ next-env.d.ts
 
 # secrets
 /secrets
+
+# vscode
+/.vscode
